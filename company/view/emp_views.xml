@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Form View-->
+        <record id="view_comp_emp_emp_form" model="ir.ui.view">
+            <field name="name">emp.emp.form</field>
+            <field name="model">emp.emp</field>
+            <field name="arch" type="xml">
+                <form string="Employee">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="age"/>
+                                <field name="emp_id"/>
+                                    </group>
+                                <group>
+                                 <field name="last_name"/>
+                                <field name="emp_date_of_birth" attrs="{'readonly':[('age', '&lt;', 18)] ,'required': [('age', '&gt;=', 18)]}" />
+                                <field name="emp_feedback"/>
+                                    </group>
+                                <group>
+                                <field name="emp_attendance"/>
+                                <field name="emp_present" widget = "boolean_toggle" />
+                                <field name="emp_absent" widget = "boolean_toggle"/>
+                                    </group>
+                                <group>
+                                 <field name="emp_gender"/>
+                                <field name="emp_work" attrs="{'invisible': [('emp_gender', '!=', 'male')]}"/>
+                             </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--Tree Views-->
+        <record id="view_comp_emp_emp_tree" model="ir.ui.view">
+            <field name="name">emp.emp.tree</field>
+            <field name="model">emp.emp</field>
+            <field name="arch" type="xml">
+                <tree string="Employee">
+                    <field name="name"/>
+                    <field name="last_name"/>
+                    <field name="age"/>
+                    <field name="emp_id"/>
+                    <field name="emp_date_of_birth"/>
+                    <field name="emp_feedback"/>
+                    <field name="emp_attendance"/>
+                    <field name="emp_present" />
+                    <field name="emp_absent"/>
+                    <field name="emp_gender"/>
+
+                </tree>
+            </field>
+        </record>
+
+        <!-- Action -->
+        <record id="action_comp_emp_emp" model="ir.actions.act_window">
+            <field name="name">Employee</field>
+            <field name="res_model">emp.emp</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!--Menus-->
+        <menuitem id="company_menu" name="Company" sequence="1"/>
+        <menuitem id="comp_employee_menu" name="Employee" sequence="2" action="action_comp_emp_emp" parent="company_menu"/>
+
+    </data>
+</odoo>
