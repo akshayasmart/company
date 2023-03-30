@@ -1,1 +1,1 @@
-from . import employee, product
+from . import employee, product, customer

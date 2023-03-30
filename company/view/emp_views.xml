@@ -9,24 +9,25 @@
                 <form string="Employee">
                     <sheet>
                         <group>
-                            <group>
-                                <field name="name"/>
-                                <field name="age"/>
-                                <field name="emp_id"/>
-                                    </group>
                                 <group>
-                                 <field name="last_name"/>
-                                <field name="emp_date_of_birth" attrs="{'readonly':[('age', '&lt;', 18)] ,'required': [('age', '&gt;=', 18)]}" />
-                                <field name="emp_feedback"/>
-                                    </group>
+                                    <field name="name"/>
+                                    <field name="age"/>
+                                    <field name="emp_id"/>
+                                </group>
                                 <group>
-                                <field name="emp_attendance"/>
-                                <field name="emp_present" widget = "boolean_toggle" />
-                                <field name="emp_absent" widget = "boolean_toggle"/>
-                                    </group>
+                                    <field name="last_name" attrs="{'readonly': [('last_name', '!=', True)]}"/>
+                                    <field name="emp_date_of_birth" attrs="{'readonly':[('age', '&lt;', 18)] ,'required': [('age', '&gt;=', 18)]}" />
+                                    <field name="emp_feedback"/>
+                                </group>
                                 <group>
-                                 <field name="emp_gender"/>
-                                <field name="emp_work" attrs="{'invisible': [('emp_gender', '!=', 'male')]}"/>
+                                    <field name="emp_attendance"/>
+                                    <field name="emp_present" widget = "boolean_toggle" />
+                                    <field name="emp_absent" widget = "boolean_toggle"/>
+                                </group>
+                                <group>
+                                    <field name="emp_gender"/>
+                                    <field name="emp_work"/>
+                                    <field name="product_id"/>
                              </group>
                         </group>
                     </sheet>
@@ -50,7 +51,7 @@
                     <field name="emp_present" />
                     <field name="emp_absent"/>
                     <field name="emp_gender"/>
-
+                    <field name="product_id"/>
                 </tree>
             </field>
         </record>

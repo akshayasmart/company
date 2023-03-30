@@ -4,7 +4,7 @@ from odoo import  models,fields
 class Emp(models.Model):
     _name = "emp.emp"
 
-    name = fields.Char(string="First_Name", translate=True, domain="[('name','like', name)]")
+    name = fields.Char(string="First_Name", translate=True)
     last_name = fields.Char(string="Last_Name")
     age = fields.Integer(string="Age")
     emp_id = fields.Integer(string="Id")
@@ -17,6 +17,5 @@ class Emp(models.Model):
                                  ('packing','Packing'),
                                  ('casher', 'Casher'),
                                  ('supervisor', 'Supervisor')])
-    emp_gender = fields.Selection([('male', 'Male'),('female', 'Female')],'Gender')
-
-
+    emp_gender = fields.Selection([('male', 'Male'), ('female', 'Female')],'Gender')
+    product_id = fields.Many2one('product.product', string="Product",domain="[('emp_work','=',emp_work)]")
