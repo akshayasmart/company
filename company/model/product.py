@@ -24,3 +24,9 @@ class Product(models.Model):
         'product_id',
         string='Customer_details',
     )
+    color = fields.Integer(string='Color')
+    start_date = fields.Datetime(string='Start Date')
+    end_date = fields.Datetime(string='End Date')
+    offers_details = fields.Char(string='Offer Details')
+
+

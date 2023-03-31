@@ -56,11 +56,80 @@
             </field>
         </record>
 
+        <!--Search-->
+        <record id="view_employee_search" model="ir.ui.view">
+            <field name="name">emp.emp.search</field>
+            <field name="model">emp.emp</field>
+            <field name="arch" type="xml">
+                <search string="Employee">
+                     <field name="emp_id" string="Emp_Id"/>
+                    <field name="age" string="Age"/>
+                    <field name="name" string="Name"/>
+                    <separator/>
+                    <filter string="Sales" name="emp_work" domain="[('emp_work','=','sales')]"/>
+                    <filter string="Packing" name="emp_work" domain="[('emp_work','=','packing')]"/>
+                    <filter string="Casher" name="emp_work" domain="[('emp_work','=','casher')]"/>
+                    <filter string="Supervisor" name="emp_work" domain="[('emp_work','=','supervisor')]"/>
+                    <group expand="0" string="Group By">
+                        <filter name="group_emp_work" string="Employee work" domain="[]" context="{'group_by':'emp_work'}"/>
+                          <filter name="group_emp_gender" string="Gender" domain="[]" context="{'group_by':'emp_gender'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!--Kanban-->
+
+         <record id="view_employee_kanban" model="ir.ui.view">
+            <field name="name">emp.kanban</field>
+            <field name="model">emp.emp</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_mobile">
+                    <field name="name"/>
+                     <templates>
+                         <t t-name="kanban-box">
+                              <div t-attf-class="oe_kanban_content oe_kanban_global_click">
+
+                                  <div class="o_dropdown_kanban dropdown">
+                                    <a class="dropdown-toggle o-no-caret btn" role="button" data-toggle="dropdown" data-display="static" href="#" aria-label="Dropdown menu" title="Dropdown menu">
+                                        <span class="fa fa-ellipsis-v"/>
+                                    </a>
+                                    <div class="dropdown-menu" role="menu">
+                                        <t t-if="widget.editable"><a role="menuitem" type="edit" class="dropdown-item">Edit</a></t>
+                                        <t t-if="widget.deletable"><a role="menuitem" type="delete" class="dropdown-item">Delete</a></t>
+                                        <ul class="oe_kanban_colorpicker" data-field="color"/>
+                                    </div>
+                                </div>
+                                  <div>
+                                    <strong class="o_kanban_record_title">
+                                        <strong>
+                                             <span><field name="name"/></span>
+                                        </strong>
+                                    </strong>
+                                  <div>
+                                    <span class="o_kanban_record_subtitle">
+                                        <field name="emp_id"/>
+                                    </span>
+                                  </div>
+                                </div>
+                                  <div class="o_kanban_record_bottom">
+                                      <div class="oe_kanban_bottom_left">
+                                           <field name="emp_gender"/>
+                                      </div>
+                                  </div>
+                              </div>
+                         </t>
+                     </templates>
+                </kanban>
+            </field>
+        </record>
+
         <!-- Action -->
         <record id="action_comp_emp_emp" model="ir.actions.act_window">
             <field name="name">Employee</field>
             <field name="res_model">emp.emp</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">tree,kanban,form</field>
+            <field name="search_view_id" ref="view_employee_search"/>
         </record>
 
         <!--Menus-->
